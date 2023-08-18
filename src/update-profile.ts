@@ -24,7 +24,7 @@ export class UpdateProfile implements IUpdateProfilePush {
 	}
 
 	/**
-	 * Transform standard DTO definition from core logic implementation to format required for Huawei MSISDN
+	 * Transform standard DTO definition from core logic implementation to format required for Tecnotree Update Profile
 	 * validation integration.
 	 *
 	 */
@@ -33,7 +33,7 @@ export class UpdateProfile implements IUpdateProfilePush {
 	}
 
 	/**
-	 * Transform response from Huawei MSISDN validation integration to DTO format recognisable by core logic
+	 * Transform response from Tecnotree Update Profile integration to DTO format recognisable by core logic
 	 * implementation.
 	 *
 	 */
