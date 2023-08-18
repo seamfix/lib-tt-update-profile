@@ -1,1 +1,2 @@
-# lib-tecnotree-update-profile
+# lib-tt-update-profile
+Tecnotree Update Profile Library
