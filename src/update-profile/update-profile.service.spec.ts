@@ -37,7 +37,6 @@ describe('Change Request service', () => {
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 		const returnObj = await serviceObj.transformRequestDTO(dto);
-		console.log(returnObj);
 		expect(returnObj.isTransformed).toBeTruthy();
     });
 
