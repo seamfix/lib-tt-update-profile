@@ -1,0 +1,27 @@
+name: actions_on_snapshot_branch
+on: 
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:    
+      - 'snapshot-dev'
+
+jobs:
+  job1:
+    name: check_merger-dev
+    runs-on: ubuntu-latest
+    env:
+      NAME_ADMIN1: sfxdoluwasegun
+      NAME_ADMIN2: sfxkalli
+      NAME_ADMIN3: sfxoekun
+      NAME_ADMIN4: sfxeezeakacha
+
+    steps:
+      - name: st1
+        if: ${{ github.actor != env.NAME_ADMIN1 && github.actor != env.NAME_ADMIN2 && github.actor != env.NAME_ADMIN3 && github.actor != env.NAME_ADMIN4 }}
+        run: exit 1
+      - name: st2
+        if: ${{ github.actor == env.NAME_ADMIN1 || github.actor == env.NAME_ADMIN2 || github.actor == env.NAME_ADMIN3 || github.actor == env.NAME_ADMIN4 }}
+        run: echo "ok"
