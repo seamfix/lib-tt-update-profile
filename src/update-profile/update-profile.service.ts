@@ -329,7 +329,9 @@ export class UpdateProfileService implements IUpdateProfile {
         try {
             const body = await this.soapApiRequest(requestUrl, soapHeaders, requestPayload.transformedObj);
             const transResponseDto = this.transformResponseDTO(body);
-            await this.saveResponsePayload(jsonDocument._id, transResponseDto);
+            if (jsonDocument) {
+				await this.saveResponsePayload(jsonDocument._id, transResponseDto);
+			}
             const integrationResponse: IResponse = {
                 status: 0,
                 msg: 'Success',
@@ -341,7 +343,9 @@ export class UpdateProfileService implements IUpdateProfile {
 			const transResponseDto = {
 				error: error
 			};
-            await this.saveResponsePayload(jsonDocument._id, transResponseDto);
+            if (jsonDocument) {
+				await this.saveResponsePayload(jsonDocument._id, transResponseDto);
+			}
 			const response: IResponse = {
 				status: -1,
 				msg: error.message,
