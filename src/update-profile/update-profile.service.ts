@@ -199,7 +199,7 @@ export class UpdateProfileService implements IUpdateProfile {
             transformRequestDTOResponse.transformedObj = xmlResult;
             return transformRequestDTOResponse;
         } catch (error: any) {
-            console.log('something wrong while transform Request DTO')
+            console.log(`something wrong while transform Request DTO. ERROR : ${JSON.stringify(error)}`);
             transformRequestDTOResponse.isTransformed = false;
             transformRequestDTOResponse.msg = error.message;
             return transformRequestDTOResponse;
@@ -280,7 +280,7 @@ export class UpdateProfileService implements IUpdateProfile {
             const jsonDocument = await createApiRequestLog.save();
             return jsonDocument;
         } catch (error) {
-            console.log('Something wrong while adding request payload to DB.')
+            console.log(`Something wrong while adding request payload to DB. ${JSON.stringify(error)}`);
             return null;
         }
     }
@@ -303,7 +303,7 @@ export class UpdateProfileService implements IUpdateProfile {
 			}
 			return false;
 		} catch (error) {
-			console.log('Something wrong while adding request payload to DB.')
+            console.log(`Something wrong while adding request payload to DB. ERROR: ${JSON.stringify(error)}`);
 			return false;
 		}
 	}
@@ -339,7 +339,7 @@ export class UpdateProfileService implements IUpdateProfile {
             }
             return integrationResponse;
         } catch (error: any) {
-			console.log('something wrong while calling Soap API.')
+            console.log(`something wrong while calling Soap API. ERROR: ${JSON.stringify(error)}`);
 			const transResponseDto = {
 				error: error
 			};
