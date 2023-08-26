@@ -1,5 +1,5 @@
 {
-  "name": "@seamfix/lib-tecnotree-update-profile",
+  "name": "@seamfix/lib-tt-update-profile",
   "version": "0.0.4",
   "description": "Tecnotree Update Profile Library",
   "main": "dist/index.js",
@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/seamfix/lib-tecnotree-update-profile.git"
+    "url": "git+https://github.com/seamfix/lib-tt-update-profile.git"
   },
   "author": "Emmanuela",
   "license": "ISC",
   "keywords": [
-    "tecnotree-update-profile",
+    "tt-update-profile",
     "lib"
   ],
   "bugs": {
-    "url": "https://github.com/seamfix/lib-tecnotree-update-profile/issues"
+    "url": "https://github.com/seamfix/lib-tt-update-profile/issues"
   },
-  "homepage": "https://github.com/seamfix/lib-tecnotree-update-profile#readme",
+  "homepage": "https://github.com/seamfix/lib-tt-update-profile#readme",
   "files": [
     "dist", "LICENSE", "README.md", "package.json"
   ],
