@@ -39,11 +39,11 @@ export class RequestDto {
     @IsString()
     idType: string;
 
-    @IsString()
-    idExpiryDate: string;
+    @IsDate()
+    idExpiryDate: Date;
 
-    @IsString()
-    idIssueDate: string;
+    @IsDate()
+    idIssueDate: Date;
 
     @IsString()
     idIssuePlace: string;
