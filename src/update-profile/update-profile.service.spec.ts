@@ -14,7 +14,7 @@ describe('Change Request service', () => {
 		dob: new Date(),
 		firstName: 'firstName',
 		fullAddress: 'fullAddress',
-		gender: 'gender',
+		gender: 'Male',
 		idExpiryDate: new Date(),
 		idIssueDate: new Date(),
 		idIssuePlace: 'idIssuePlace',
@@ -29,11 +29,27 @@ describe('Change Request service', () => {
 		street: 'street',
 		title: 'title',
 		uniqueId: 'uniqueId',
+		authUser: 'axonext',
+		authPassword: 'axonext',
+		authType: 'PLAIN',
+		clientUserId: 'axonext',
+		sender: 'axonext',
+		messageId: 'abl_portal',
+		isMobileMoney: "N",
+		nationality: "Cote d'Ivoire",
+		occupation: "test",
+		simNumber: "89225050015717125805",
+		externalLogReference: '58688972',
+		agentName: '',
+		organization: 'MTNCI',
+		externalApplication: 'axonext',
+		externalUser: 'axonext',
+		infoLevel: '3'
 	}
 
     it('should transform request', async () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 		const returnObj = await serviceObj.transformRequestDTO(dto);
@@ -42,7 +58,7 @@ describe('Change Request service', () => {
 
 	it('should NOT transform request', async () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 		const returnObj = await serviceObj.transformRequestDTO({
@@ -57,7 +73,7 @@ describe('Change Request service', () => {
 
 	it('should return error on transform request', async () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 		serviceObj.dtoValidation = jest.fn().mockImplementationOnce(() => {
@@ -71,6 +87,89 @@ describe('Change Request service', () => {
 			} as any
 		);
 		expect(returnObj.msg).toBe('testError');
+	});
+
+	it('should return fail response on transform request because added wrong value in optional field', async () => {
+		apiLogModel = jest.fn(() => ({
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
+        }));
+        const serviceObj = new UpdateProfileService(apiLogModel);
+		const returnObj = await serviceObj.transformRequestDTO({
+				apiUrl: 'url',
+				imsi: 'imsi',
+				msisdn: 'msisdn',
+				uniqueId: 'uniqueId',
+				firstName: 'test',
+				lastName: 'test',
+				gender: 'Male',
+				dob: new Date(),
+				idNumber: '123',
+				idType: 'test',
+				idExpiryDate: new Date(),
+				idIssueDate: new Date(),
+				idIssuePlace: 'test',
+				city: 'test',
+				authUser: 'axonext',
+				authPassword: 'axonext',
+				authType: 'PLAIN',
+				clientUserId: 'axonext',
+				sender: 'axonext',
+				messageId: 'abl_portal',
+				isMobileMoney: "N",
+				nationality: "Cote d'Ivoire",
+				simNumber: "89225050015717125805",
+				agentName: '',
+				organization: '',
+				externalLogReference: '',
+				billByEmail: 'test',
+				externalApplication: 'axonext',
+				externalUser: 'axonext',
+				infoLevel: '3'
+			} as any
+		);
+		expect(returnObj.isTransformed).toBe(false);
+		expect(returnObj.msg).toEqual('{"isEnum":"billByEmail must be one of the following values: Y, N"}');
+
+	});
+
+	it('should return true response on transform request did not added optional fields', async () => {
+		apiLogModel = jest.fn(() => ({
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
+        }));
+        const serviceObj = new UpdateProfileService(apiLogModel);
+		const returnObj = await serviceObj.transformRequestDTO({
+				apiUrl: 'url',
+				imsi: 'imsi',
+				msisdn: 'msisdn',
+				uniqueId: 'uniqueId',
+				firstName: 'test',
+				lastName: 'test',
+				gender: 'Male',
+				dob: new Date(),
+				idNumber: '123',
+				idType: 'test',
+				idExpiryDate: new Date(),
+				idIssueDate: new Date(),
+				idIssuePlace: 'test',
+				city: 'test',
+				authUser: 'axonext',
+				authPassword: 'axonext',
+				authType: 'PLAIN',
+				clientUserId: 'axonext',
+				sender: 'axonext',
+				messageId: 'abl_portal',
+				isMobileMoney: "N",
+				nationality: "Cote d'Ivoire",
+				simNumber: "89225050015717125805",
+				agentName: '',
+				organization: '',
+				externalLogReference: '',
+				externalApplication: 'axonext',
+				externalUser: 'axonext',
+				infoLevel: '3'
+			} as any
+		);
+		expect(returnObj.isTransformed).toBe(true);
 	});
 
 	it('should transform response object', () => {
@@ -114,7 +213,7 @@ describe('Change Request service', () => {
 		`;
 
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 
@@ -124,7 +223,7 @@ describe('Change Request service', () => {
 
 	it('should save request payload', async () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 
@@ -142,7 +241,7 @@ describe('Change Request service', () => {
 
 	it('should return error on save response payload', async () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 
@@ -152,7 +251,7 @@ describe('Change Request service', () => {
 
 	it('should calculate duraction', () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 
@@ -170,7 +269,7 @@ describe('Change Request service', () => {
 		];
 
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 
@@ -180,11 +279,41 @@ describe('Change Request service', () => {
 
 	it ('should NOT simplify JSON', () => {
 		apiLogModel = jest.fn(() => ({
-            save: jest.fn().mockReturnThis(),
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
         }));
         const serviceObj = new UpdateProfileService(apiLogModel);
 
 		const result = serviceObj.simplifyJSON('testJson');
 		expect(result).toBe('testJson');
+	});
+
+	it ('should call endpoint', async () => {
+		apiLogModel = jest.fn(() => ({
+            save: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
+			findOne: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
+			create: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
+			updateOne: jest.fn().mockResolvedValue({ uniqueId: 'uniqueId', msisdn: 'msisdn', startTime: new Date() }),
+        }));
+
+		const response = {
+			status: "0",
+			msg: 'FAILED',
+			payload: null
+		}
+
+		const requestDto: RequestDto = {
+			...dto,
+			apiUrl: 'http://10.18.62.231:9960/services/EIAproxy',
+			msisdn: '0507596761',
+			externalLogReference: "82689279793",
+			idType: "NATID"
+		}
+
+		const serviceObj = new UpdateProfileService(apiLogModel);
+
+		const result = await serviceObj.integration(requestDto);
+
+		expect(result.status).toBe(response.status);
+		expect(result.msg).toBe(response.msg);
 	});
 });
