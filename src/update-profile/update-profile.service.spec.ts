@@ -41,7 +41,10 @@ describe('Change Request service', () => {
 		simNumber: "89225050015717125805",
 		externalLogReference: '58688972',
 		agentName: '',
-		organization: 'MTNCI'
+		organization: 'MTNCI',
+		externalApplication: 'axonext',
+		externalUser: 'axonext',
+		infoLevel: '3'
 	}
 
     it('should transform request', async () => {
@@ -118,8 +121,10 @@ describe('Change Request service', () => {
 				agentName: '',
 				organization: '',
 				externalLogReference: '',
-				billByEmail: 'test'
-				
+				billByEmail: 'test',
+				externalApplication: 'axonext',
+				externalUser: 'axonext',
+				infoLevel: '3'
 			} as any
 		);
 		expect(returnObj.isTransformed).toBe(false);
@@ -159,6 +164,9 @@ describe('Change Request service', () => {
 				agentName: '',
 				organization: '',
 				externalLogReference: '',
+				externalApplication: 'axonext',
+				externalUser: 'axonext',
+				infoLevel: '3'
 			} as any
 		);
 		expect(returnObj.isTransformed).toBe(true);
@@ -290,7 +298,7 @@ describe('Change Request service', () => {
 		const response = {
 			status: "0",
 			msg: 'FAILED',
-			payload: { code: 0, message: '', payload: '' }
+			payload: null
 		}
 
 		const requestDto: RequestDto = {

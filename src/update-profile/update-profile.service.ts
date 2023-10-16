@@ -101,10 +101,10 @@ export class UpdateProfileService implements IUpdateProfile {
                                                            "_attributes": { 
                                                                 "CLIENT_ID": "MTNCI",
                                                                 "ENTITY_ID": dto.msisdn,
-                                                                "EXTERNAL_APPLICATION": "axonext",
+                                                                "EXTERNAL_APPLICATION": dto.externalApplication,
                                                                 "EXTERNAL_SYSTEMS_LOG_REFERNCE": dto.externalLogReference,
-                                                                "EXTERNAL_USER": "axonext",
-                                                                "INFO_LEVEL": "3",
+                                                                "EXTERNAL_USER": dto.externalUser,
+                                                                "INFO_LEVEL": dto.infoLevel,
                                                                 "OPERATION_NAME": "updateSubscriber",
                                                                 "SERVICE_CODE": "GSM"
                                                             }

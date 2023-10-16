@@ -180,4 +180,16 @@ export class RequestDto {
     @IsEnum(Language)
     presentLanguage?: string;
 
+    @IsDefined()
+    @IsString()
+    externalApplication: string;
+
+    @IsDefined()
+    @IsString()
+    externalUser: string;
+
+    @IsDefined()
+    @IsString()
+    infoLevel: string;
+
 }
