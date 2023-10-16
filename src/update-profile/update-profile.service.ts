@@ -12,7 +12,7 @@ import { ITransformRequest } from '../interfaces/transform-request.interface';
 import { IUpdateProfile } from '../interfaces/update-profile.interface';
 import { IValidatorResponse } from '../interfaces/validator-response.interface';
 import { IApiLog } from './../interfaces/api-log.interface';
-import { Gender, GenderValue } from '../enum/common.enum';
+import { Gender, GenderValue, ResponseCode, ResponseMessage } from '../enum/common.enum';
 
 export class UpdateProfileService implements IUpdateProfile {
 
@@ -309,7 +309,7 @@ export class UpdateProfileService implements IUpdateProfile {
 				await this.saveResponsePayload(jsonDocument._id, transResponseDto);
 			}
             const integrationResponse: IResponse = {
-                status: transResponseDto.code,
+                status: transResponseDto.message == ResponseMessage.COMPLETED ? ResponseCode.SUCCESS : ResponseCode.FAILED,
                 msg: transResponseDto.message,
                 payload: transResponseDto.payload
             }

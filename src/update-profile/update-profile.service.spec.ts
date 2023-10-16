@@ -121,14 +121,14 @@ describe('Change Request service', () => {
 				agentName: '',
 				organization: '',
 				externalLogReference: '',
-				billByEmail: 'test',
+				billByEmail: 123,
 				externalApplication: 'axonext',
 				externalUser: 'axonext',
 				infoLevel: '3'
 			} as any
 		);
 		expect(returnObj.isTransformed).toBe(false);
-		expect(returnObj.msg).toEqual('{"isEnum":"billByEmail must be one of the following values: Y, N"}');
+		expect(returnObj.msg).toEqual('{"isString":"billByEmail must be a string"}');
 
 	});
 
@@ -296,7 +296,7 @@ describe('Change Request service', () => {
         }));
 
 		const response = {
-			status: "0",
+			status: -1,
 			msg: 'FAILED',
 			payload: null
 		}

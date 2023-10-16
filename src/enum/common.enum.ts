@@ -3,16 +3,16 @@ export enum Gender {
     FEMALE = 'F'
 }
 
-export enum CommonValue {
-    YES = 'Y',
-    NO = 'N'
-}
-
-export enum Language {
-    EN = 'E'
-}
-
 export enum GenderValue {
     MALE = 'male',
     FEMALE = 'female'
+}
+
+export enum ResponseMessage {
+    COMPLETED = 'COMPLETED'
+}
+
+export enum ResponseCode {
+    SUCCESS = 0,
+    FAILED = -1
 }

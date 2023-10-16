@@ -1,6 +1,5 @@
-import { IsDate, IsDefined, IsEnum, IsObject, IsOptional, IsString, isString } from "class-validator";
+import { IsDate, IsDefined, IsObject, IsOptional, IsString, isString } from "class-validator";
 import { ObjectId } from 'mongoose';
-import { CommonValue, Language } from "../enum/common.enum";
 
 export class RequestDto {
 
@@ -149,19 +148,19 @@ export class RequestDto {
     organization: string;
 
     @IsOptional()
-    @IsEnum(CommonValue)
+    @IsString()
     billByEmail?: string;
 
     @IsOptional()
-    @IsEnum(CommonValue)
+    @IsString()
     billByFax?: string;
 
     @IsOptional()
-    @IsEnum(CommonValue)
+    @IsString()
     billByPost?: string;
 
     @IsOptional()
-    @IsEnum(CommonValue)
+    @IsString()
     billBySms?: string;
 
     @IsOptional()
@@ -177,7 +176,7 @@ export class RequestDto {
     preferredCurrency?: string;
 
     @IsOptional()
-    @IsEnum(Language)
+    @IsString()
     presentLanguage?: string;
 
     @IsDefined()
