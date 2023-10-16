@@ -12,7 +12,7 @@ import { ITransformRequest } from '../interfaces/transform-request.interface';
 import { IUpdateProfile } from '../interfaces/update-profile.interface';
 import { IValidatorResponse } from '../interfaces/validator-response.interface';
 import { IApiLog } from './../interfaces/api-log.interface';
-import { Gender } from '../enum/common.enum';
+import { Gender, GenderValue } from '../enum/common.enum';
 
 export class UpdateProfileService implements IUpdateProfile {
 
@@ -396,9 +396,9 @@ export class UpdateProfileService implements IUpdateProfile {
         if(!gender) {
             return ''
         } else {
-            if(gender.toLocaleLowerCase() === 'male') {
+            if(gender.toLocaleLowerCase() === GenderValue.MALE) {
                 return Gender.MALE
-            } else if(gender.toLocaleLowerCase() === 'female') {
+            } else if(gender.toLocaleLowerCase() === GenderValue.FEMALE) {
                 return Gender.FEMALE
             } else {
                 return ''

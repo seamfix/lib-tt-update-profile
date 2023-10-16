@@ -11,3 +11,8 @@ export enum CommonValue {
 export enum Language {
     EN = 'E'
 }
+
+export enum GenderValue {
+    MALE = 'male',
+    FEMALE = 'female'
+}
