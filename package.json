@@ -1,6 +1,6 @@
 {
   "name": "@seamfix/lib-tt-update-profile",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Tecnotree Update Profile Library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

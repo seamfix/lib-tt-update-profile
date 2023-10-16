@@ -12,6 +12,7 @@ import { ITransformRequest } from '../interfaces/transform-request.interface';
 import { IUpdateProfile } from '../interfaces/update-profile.interface';
 import { IValidatorResponse } from '../interfaces/validator-response.interface';
 import { IApiLog } from './../interfaces/api-log.interface';
+import { Gender } from '../enum/common.enum';
 
 export class UpdateProfileService implements IUpdateProfile {
 
@@ -46,13 +47,13 @@ export class UpdateProfileService implements IUpdateProfile {
                         },
                         "auth:authentication": {
                             "auth:user": {
-                                "_text": "admin"
+                                "_text": dto.authUser
                             },
                             "auth:password": {
-                                "_text": "admin"
+                                "_text": dto.authPassword
                             },
                             "auth:type": {
-                                "_text": "PLAIN"
+                                "_text": dto.authType
                             }
                         }
                     },
@@ -76,13 +77,13 @@ export class UpdateProfileService implements IUpdateProfile {
                                     "_text": "En"
                                 },
                                 "UserId": {
-                                    "_text": "externalapp"
+                                    "_text": dto.clientUserId
                                 },
                                 "Sender": {
-                                    "_text": "externalapp"
+                                    "_text": dto.sender
                                 },
                                 "MessageId": {
-                                    "_text": "abl_portal"
+                                    "_text": dto.messageId
                                 },
                                 "Payload": {
                                     "ser:Services": {
@@ -96,88 +97,62 @@ export class UpdateProfileService implements IUpdateProfile {
                                             "ser:ChangeServicesRequest": {
                                                 "ser:request": {
                                                     "EVENT": {
-                                                        "_attributes": {
-                                                            "EXTERNAL_APPLICATION": "axonext",
-                                                            "EXTERNAL_USER": "clmui",
-                                                            "API_CODE": "60022",
-                                                            "INFO_LEVEL": "1",
-                                                            "CLIENT_ID": "CI",
-                                                            "EXTERNAL_REFERENCE": "294420478", // TODO
-                                                            "EXTERNAL_SYSTEMS_LOG_REFERNCE": dto.objectId,
-                                                            "EXT_SUBSCRIBER_CODE": "11946322", // TODO
-                                                            "UPDT_ONLY_SERVICE": "N", // TODO
-                                                            "ACCOUNT_LINK_CODE": "725093863" // TODO
+                                                        "REQUEST": {
+                                                           "_attributes": { 
+                                                                "CLIENT_ID": "MTNCI",
+                                                                "ENTITY_ID": dto.msisdn,
+                                                                "EXTERNAL_APPLICATION": "axonext",
+                                                                "EXTERNAL_SYSTEMS_LOG_REFERNCE": dto.externalLogReference,
+                                                                "EXTERNAL_USER": "axonext",
+                                                                "INFO_LEVEL": "3",
+                                                                "OPERATION_NAME": "updateSubscriber",
+                                                                "SERVICE_CODE": "GSM"
+                                                            }
                                                         },
-                                                        "PROFILE_INFO": {
-                                                            "PROFILEDETAILS": {
+                                                        "REQUESTDETAILS": {
+                                                            "_attributes": {
+                                                                "AGENT_NAME": dto.agentName,
+                                                                "DATE_OF_BIRTH": this.getDateByFormate(dto.dob, 'YYYYMMDD'),
+                                                                "DOCUMENTID_NUMBER": dto.idNumber,
+                                                                "DOCUMENTID_TYPE": dto.idType,
+                                                                "DOCUMENT_EXPIRY_DATE": this.getDateByFormate(dto.idExpiryDate, 'YYYYMMDD'),
+                                                                "DOCUMENT_ISSUE_DATE": this.getDateByFormate(dto.idIssueDate, 'YYYYMMDD'),
+                                                                "DOCUMENT_ISSUE_PLACE": dto.idIssuePlace,
+                                                                "FIRST_NAME": dto.firstName,
+                                                                "GENDER": this.getGender(dto.gender) ,
+                                                                "LAST_NAME": dto.lastName,
+                                                                "MOBILE_MONEY": dto.isMobileMoney,
+                                                                "NATIONALITY": dto.nationality,
+                                                                "OCCUPATION": dto.occupation,
+                                                                "ORGANIZATION": dto.organization,
+                                                                "SIM_NUMBER": dto.simNumber
+                                                            }
+                                                        },
+                                                        "ADDRESS": {
+                                                            "PHYSICAL_ADDRESS": {
                                                                 "_attributes": {
-                                                                    "TITLE": dto.title,
-                                                                    "FIRST_NAME": dto.firstName,
-                                                                    "MIDDLE_NAME": dto.middleName,
-                                                                    "LAST_NAME": dto.lastName,
-                                                                    "DATE_OF_BIRTH": this.getDateByFormate(dto.dob, 'YYYY/MM/DD'),
-                                                                    "SEND_EMAIL_NOTIFICATION": "",
-                                                                    "SEND_SMS_NOTIFICATION": "",
-                                                                    "NOTIFICATION_EMAIL_IDS": "",
-                                                                    "SMS_NUMBER": "",
-                                                                    "IDENTIFICATION_NUMBER": dto.idNumber,
-                                                                    "IDENTIFICATION_TYPE": dto.idType,
-                                                                    "IDENTIFICATION_EXPIRY_DATE": dto.idExpiryDate,
-                                                                    "IDENTIFICATION_ISSUE_DATE": dto.idIssueDate,
-                                                                    "ID_ISSUE_PLACE": dto.idIssuePlace
-                                                                }
-                                                            },
-                                                            "ADDRESS_INFO": {
-                                                                "ADDRESS_DTLS": {
-                                                                    "_attributes": {
-                                                                        "ADDRESS_TYPE": dto.addressType,
-                                                                        "ADDRESS1": dto.fullAddress,
-                                                                        "ADDRESS2": dto.fullAddress,
-                                                                        "ADDRESS3": dto.fullAddress,
-                                                                        "ADDRESS4": dto.fullAddress,
-                                                                        "ADDRESS5": dto.fullAddress,
-                                                                        "LOCALITY": dto.locality,
-                                                                        "STREET_DESC": dto.street,
-                                                                        "CITY": dto.city,
-                                                                        "DISTRICT": dto.district,
-                                                                        "COUNTRY": dto.country,
-                                                                        "POSTAL_CODE": dto.postalCode,
-                                                                    }
+                                                                    "ADDRESS1": dto.fullAddress,
+                                                                    "ADDRESS2": '',
+                                                                    "ADDRESS3": '',
+                                                                    "ADDRESS4": '',
+                                                                    "ADDRESS_TYPE": dto.addressType,
+                                                                    "CITY": dto.city,
+                                                                    "POBOX": '',
                                                                 }
                                                             }
                                                         },
-                                                        "SERVICE_INFO": {
-                                                            "SERVICEDETAILS": {
+                                                        "DOCUMENTS": {},
+                                                        "BILLDETAILS": {
+                                                            "BILL_PREFERENCE": {
                                                                 "_attributes": {
-                                                                    "TITLE": dto.title,  // TODO confusion, same param as above
-                                                                    "DOB": this.getDateByFormate(dto.dob, 'YYYY/MM/DD'),  // TODO confusion, same param as above
-                                                                    "GENDER": dto.gender,  // TODO confusion, same param as above 
-                                                                    "FIRST_NAME": dto.firstName,  // TODO confusion, same param as above 
-                                                                    "LAST_NAME": dto.lastName,  // TODO confusion, same param as above 
-                                                                    "MIDDLE_NAME": dto.middleName,  // TODO confusion, same param as above 
-                                                                    "ID_EXPIRY_DATE": dto.idExpiryDate,  // TODO confusion, same param as above 
-                                                                    "ID_ISSUE_DATE": dto.idIssueDate,  // TODO confusion, same param as above 
-                                                                    "ID_ISSUE_PLACE": dto.idIssuePlace,  // TODO confusion, same param as above 
-                                                                    "ID_NUMBER": dto.idNumber,  // TODO confusion, same param as above 
-                                                                    "ID_TYPE": dto.idType,  // TODO confusion, same param as above
-                                                                }
-                                                            }
-                                                        }, 
-                                                        "ADDRESS_INFO": {
-                                                            "ADDRESS_DTLS": {
-                                                                "_attributes": {
-                                                                    "ADDRESS_TYPE": dto.addressType, // TODO confusion, same param as above
-                                                                    "ADDRESS1": dto.fullAddress, // TODO confusion, same param as above
-                                                                    "ADDRESS2": dto.fullAddress, // TODO confusion, same param as above
-                                                                    "ADDRESS3": dto.fullAddress, // TODO confusion, same param as above
-                                                                    "ADDRESS4": dto.fullAddress, // TODO confusion, same param as above
-                                                                    "ADDRESS5": dto.fullAddress, // TODO confusion, same param as above
-                                                                    "LOCALITY": dto.locality, // TODO confusion, same param as above
-                                                                    "STREET_DESC": dto.street, // TODO confusion, same param as above
-                                                                    "CITY": dto.city, // TODO confusion, same param as above
-                                                                    "DISTRICT": dto.district, // TODO confusion, same param as above
-                                                                    "COUNTRY": dto.country, // TODO confusion, same param as above
-                                                                    "POSTAL_CODE": dto.postalCode, // TODO confusion, same param as above
+                                                                    "BILL_BY_EMAIL": dto.billByEmail,
+                                                                    "BILL_BY_FAX": dto.billByFax,
+                                                                    "BILL_BY_POST": dto.billByPost,
+                                                                    "BILL_BY_SMS": dto.billBySms,
+                                                                    "EMAIL1": dto.billEmail1,
+                                                                    "EMAIL2": dto.billEmail2,
+                                                                    "PREFFERED_CURRENCY": dto.preferredCurrency,
+                                                                    "PRESENTATION_LANGUAGE": dto.presentLanguage
                                                                 }
                                                             }
                                                         }
@@ -324,6 +299,7 @@ export class UpdateProfileService implements IUpdateProfile {
 
         const soapHeaders = {
             'Content-Type': 'text/xml;charset=UTF-8',
+            'SOAPAction': 'http://www.openuri.org/clientRequest'
         };
 
         try {
@@ -333,9 +309,9 @@ export class UpdateProfileService implements IUpdateProfile {
 				await this.saveResponsePayload(jsonDocument._id, transResponseDto);
 			}
             const integrationResponse: IResponse = {
-                status: 0,
-                msg: 'Success',
-                payload: transResponseDto
+                status: transResponseDto.code,
+                msg: transResponseDto.message,
+                payload: transResponseDto.payload
             }
             return integrationResponse;
         } catch (error: any) {
@@ -373,7 +349,7 @@ export class UpdateProfileService implements IUpdateProfile {
 
     async dtoValidation(dto: any): Promise<IValidatorResponse> {
         const userStructureClass = plainToInstance(RequestDto, dto);
-        const errors = await validate(userStructureClass);
+        const errors = await validate(userStructureClass, { skipMissingProperties: true });
         const validateResponse: IValidatorResponse = {
             isValid: true,
             msg: null
@@ -415,4 +391,19 @@ export class UpdateProfileService implements IUpdateProfile {
 			return jsonObj;
 		}
 	}
+
+    getGender(gender: string): string {
+        if(!gender) {
+            return ''
+        } else {
+            if(gender.toLocaleLowerCase() === 'male') {
+                return Gender.MALE
+            } else if(gender.toLocaleLowerCase() === 'female') {
+                return Gender.FEMALE
+            } else {
+                return ''
+            }
+        }
+        
+    } 
 }
