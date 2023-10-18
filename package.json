@@ -1,6 +1,6 @@
 {
   "name": "@seamfix/lib-tt-update-profile",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Tecnotree Update Profile Library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -24,7 +24,10 @@
   },
   "homepage": "https://github.com/seamfix/lib-tt-update-profile#readme",
   "files": [
-    "dist", "LICENSE", "README.md", "package.json"
+    "dist",
+    "LICENSE",
+    "README.md",
+    "package.json"
   ],
   "devDependencies": {
     "@types/express": "^4.17.17",
@@ -49,7 +52,7 @@
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "easy-soap-request": "^5.3.0",
+    "easy-soap-request": "^5.4.0",
     "moment": "^2.29.3",
     "mongoose": "^7.4.3",
     "ramda": "^0.29.0",
