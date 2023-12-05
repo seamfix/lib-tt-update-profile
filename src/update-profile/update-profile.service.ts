@@ -106,7 +106,7 @@ export class UpdateProfileService implements IUpdateProfile {
                                                                 "EXTERNAL_USER": dto.externalUser,
                                                                 "INFO_LEVEL": dto.infoLevel,
                                                                 "OPERATION_NAME": "updateSubscriber",
-                                                                "SERVICE_CODE": "GSM"
+                                                                "SERVICE_CODE": dto.serviceCode
                                                             }
                                                         },
                                                         "REQUESTDETAILS": {

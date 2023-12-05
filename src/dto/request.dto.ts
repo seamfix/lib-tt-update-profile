@@ -191,4 +191,7 @@ export class RequestDto {
     @IsString()
     infoLevel: string;
 
+    @IsDefined()
+    @IsString()
+    serviceCode: string;
 }
