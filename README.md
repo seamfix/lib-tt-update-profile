@@ -1,2 +1,2 @@
-# lib-tt-update-profile
+# lib-tt-update-profiles
 Tecnotree Update Profile Library
