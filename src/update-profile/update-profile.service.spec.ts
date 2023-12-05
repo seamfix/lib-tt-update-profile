@@ -44,7 +44,8 @@ describe('Change Request service', () => {
 		organization: 'MTNCI',
 		externalApplication: 'axonext',
 		externalUser: 'axonext',
-		infoLevel: '3'
+		infoLevel: '3',
+		serviceCode: 'axonext',
 	}
 
     it('should transform request', async () => {
