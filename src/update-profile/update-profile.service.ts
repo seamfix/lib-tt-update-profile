@@ -245,7 +245,7 @@ export class UpdateProfileService implements IUpdateProfile {
             const payload: IApiLog = {
                 uniqueId: uniqueId,
                 msisdn: request.msisdn,
-                requestType: 'SOAP Request',
+                requestType: 'TT Update Profile',
                 startTime: new Date(),
                 tpRequestPayload: JSON.stringify(requestPayload)
             }
