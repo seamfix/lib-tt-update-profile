@@ -47,7 +47,7 @@
     "typescript": "^5.1.6"
   },
   "dependencies": {
-    "mongoose": "^7.4.3",
+    "mongoose": "^7.8.9",
     "rimraf": "^5.0.1"
   }
 }
